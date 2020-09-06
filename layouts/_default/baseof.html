@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {{ partial "html-meta.html" . -}}
 <title>{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
-<link rel="stylesheet" type="text/css" href="{{ "/css/main.css" | relURL }}">
+<link rel="stylesheet" type="text/css" href="{{ .Site.Params.csslocation | relURL }}">
 {{ with .Site.Params.favicon -}}
 <link rel="icon" href="{{ . }}" type="image/x-icon">
 {{ end -}}
@@ -19,9 +19,10 @@
     {{ end -}}
   </nav>
   {{ end -}}
-  <div>
+  <div class="blog-header">
     <h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
-    {{- if .Site.Params.subtitle }}<h2><a href="{{ .Site.BaseURL }}">{{ .Site.Params.subtitle }}</a></h2>{{- end }}
+    <div><a href="{{ .Site.BaseURL }}"><img src="{{.Site.Params.bloglogo}}" class="bloglogo"></img></a></div>
+    {{- if .Site.Params.subtitle }}<h4>{{ .Site.Params.subtitle }}</h4>{{- end }}
   </div>
   <nav>
     {{- range .Site.Menus.main -}}
@@ -36,19 +37,18 @@
 </main>
 <footer>
   <div>
+    <nav class="footer-menu">
+      {{- range .Site.Menus.footer -}}
+        <a href="{{ .URL }}">{{ .Name }}</a>
+      {{- end -}}
+    </nav>
     <div>
       {{- if .Site.Copyright -}}
-        {{ .Site.Copyright | markdownify }}
-      {{- else -}}
-        &copy; 2019 Linlin Yan. <a href="https://creativecommons.org/licenses/by/4.0/deed.zh">CC-BY-4.0</a>
-      {{- end -}}
-      {{- if .Site.Params.ShowThemeInfo -}}
-        <p>Powered by <a href="https://gohugo.io/">Hugo</a> with <a href="https://github.com/yanlinlin82/simple-style">Simple-Style</a>
+        {{ .Site.Copyright | markdownify}} <a href="{{.Site.Params.licensepage}}">{{.Site.Params.licensetext}}</a>
       {{- end -}}
     </div>
   </div>
 </footer>
 {{ template "_internal/google_analytics_async.html" . -}}
-{{ partial "github-corner.html" . -}}
 </body>
 </html>

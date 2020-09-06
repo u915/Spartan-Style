@@ -6,9 +6,18 @@
   {{ .Content -}}
 </div>
 <ul>
-  {{ range .Paginator.Pages -}}
-  <li>{{ with .Date }}{{ .Format "2006-01-02 15:04" }} - {{ end }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Description }}: {{ . }}{{ end }}</li>
-  {{ end -}}
+
+<!-- Groups content by month according to the "date" field in front matter -->
+{{ range .Pages.GroupByDate "2006-01" }}
+<h3>{{ .Key }}</h3>
+<ul>
+    {{ range .Pages }}
+    <li>
+    {{ .Date.Format "2006-01-02" }} <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+</ul>
+{{ end }}
 </ul>
 </main>
 {{ end }}
