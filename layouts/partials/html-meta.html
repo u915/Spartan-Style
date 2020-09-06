@@ -11,12 +11,12 @@
 {{ with .Site.Params.referrer -}}
 <meta name="referrer" content="{{ . }}">
 {{ end -}}
-<meta name="og:description" content="{{ if .Description -}}{{ .Description }}{{ else }}{{ .Site.Params.Description }}{{ end -}}">
+<meta property="og:description" content="{{ if .Description -}}{{ .Description }}{{ else }}{{ .Site.Params.Description }}{{ end -}}">
 {{ with .Title -}}
-<meta name="og:title" content="{{ . }}">
+<meta property="og:title" content="{{ . }}">
 {{ end -}}
 {{ with .Permalink -}}
-<meta name="og:url" content="{{ . }}">
+<meta property="og:url" content="{{ . }}">
 {{ end -}}
 {{ with .Site.Params.ogimage -}}
 <meta property="og:image" content="{{ . }}" />
