@@ -18,3 +18,6 @@
 {{ with .Permalink -}}
 <meta name="og:url" content="{{ . }}">
 {{ end -}}
+{{ with .Site.Params.ogimage -}}
+<meta property="og:image" content="{{ . }}" />
+{{ end -}}
